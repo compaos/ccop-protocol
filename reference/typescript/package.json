@@ -1,7 +1,7 @@
 {
   "name": "@ccop/reference-core",
   "version": "0.5.3",
-  "description": "Non-normative TypeScript reference core for Compaos Protocol v0.5.3",
+  "description": "Non-normative TypeScript reference core for CCOP v0.5.3",
   "type": "module",
   "private": true,
   "engines": {
