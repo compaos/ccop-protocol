@@ -1,0 +1,6 @@
+{
+  "id": "N57",
+  "description": "forged GovernanceWriterRegistry change rejected",
+  "expected": "EVENT_WRITER_UNAUTHORIZED",
+  "executable_in_reference_harness": false
+}

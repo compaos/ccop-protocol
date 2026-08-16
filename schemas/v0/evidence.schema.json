@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/evidence.schema.json",
+  "title": "Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "evidence"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence"
+      ],
+      "properties": {
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "admission"
+          ],
+          "properties": {
+            "evidence_type": {
+              "type": "string"
+            },
+            "admission": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "CANDIDATE",
+                    "ADMITTED"
+                  ]
+                },
+                "admitted_by": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+                }
+              }
+            },
+            "derived_from_candidate_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "source": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "control": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "declaration",
+                    "controlled_by"
+                  ],
+                  "properties": {
+                    "declaration": {
+                      "enum": [
+                        "complete",
+                        "partial",
+                        "unknown"
+                      ]
+                    },
+                    "controlled_by": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "provenance": {
+              "type": "object"
+            },
+            "measurement": {}
+          }
+        }
+      }
+    }
+  }
+}

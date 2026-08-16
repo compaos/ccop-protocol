@@ -1,0 +1,6 @@
+{
+  "id": "N26",
+  "description": "reconciliation failure maps to UNKNOWN",
+  "expected": "UNKNOWN",
+  "executable_in_reference_harness": false
+}

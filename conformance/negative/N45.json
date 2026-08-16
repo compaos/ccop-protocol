@@ -1,0 +1,6 @@
+{
+  "id": "N45",
+  "description": "writer authorization evaluated against bound Registry revision",
+  "expected": "EVENT_WRITER_UNAUTHORIZED",
+  "executable_in_reference_harness": true
+}

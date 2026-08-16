@@ -1,0 +1,6 @@
+{
+  "id": "N48",
+  "description": "unauthorized Registry modification rejected",
+  "expected": "EVENT_WRITER_UNAUTHORIZED",
+  "executable_in_reference_harness": false
+}

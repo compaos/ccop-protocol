@@ -1,0 +1,6 @@
+{
+  "id": "N28",
+  "description": "reconciliation itself is governed",
+  "expected": "AUTHORITY_REQUIRED",
+  "executable_in_reference_harness": false
+}

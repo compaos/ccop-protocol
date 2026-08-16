@@ -1,0 +1,6 @@
+{
+  "id": "N65",
+  "description": "unknown RFC3339 offset rejected",
+  "expected": "TIMESTAMP_UNKNOWN_OFFSET",
+  "executable_in_reference_harness": true
+}

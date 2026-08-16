@@ -1,0 +1,125 @@
+[
+  {
+    "id": "timestamp-offset",
+    "op": "canonical_timestamp",
+    "args": [
+      "2026-08-16T10:00:00+02:00"
+    ],
+    "expected": "2026-08-16T08:00:00Z"
+  },
+  {
+    "id": "timestamp-frac",
+    "op": "canonical_timestamp",
+    "args": [
+      "2026-08-16T08:00:00.120000Z"
+    ],
+    "expected": "2026-08-16T08:00:00.12Z"
+  },
+  {
+    "id": "glob-one",
+    "op": "glob",
+    "args": [
+      "fix/*",
+      "fix/auth"
+    ],
+    "expected": true
+  },
+  {
+    "id": "glob-slash",
+    "op": "glob",
+    "args": [
+      "fix/*",
+      "fix/auth/deep"
+    ],
+    "expected": false
+  },
+  {
+    "id": "glob-deep",
+    "op": "glob",
+    "args": [
+      "fix/**",
+      "fix/auth/deep"
+    ],
+    "expected": true
+  },
+  {
+    "id": "decimal-gte",
+    "op": "eval_op",
+    "args": [
+      "0.9963",
+      "decimal_gte",
+      "0.99"
+    ],
+    "expected": true
+  },
+  {
+    "id": "money-add",
+    "op": "money_add",
+    "args": [
+      [
+        {
+          "amount": "1.10",
+          "scale": 2,
+          "currency": "EUR"
+        },
+        {
+          "amount": "2.20",
+          "scale": 2,
+          "currency": "EUR"
+        },
+        {
+          "amount": "0.70",
+          "scale": 2,
+          "currency": "EUR"
+        }
+      ],
+      "EUR",
+      2
+    ],
+    "expected": {
+      "amount": "4.00",
+      "scale": 2,
+      "currency": "EUR"
+    }
+  },
+  {
+    "id": "fx-half-even-down",
+    "op": "fx_settle",
+    "args": [
+      {
+        "amount": "1.00",
+        "scale": 2,
+        "currency": "USD"
+      },
+      "1.005",
+      3,
+      "EUR",
+      2
+    ],
+    "expected": {
+      "amount": "1.00",
+      "scale": 2,
+      "currency": "EUR"
+    }
+  },
+  {
+    "id": "fx-half-even-up",
+    "op": "fx_settle",
+    "args": [
+      {
+        "amount": "1.00",
+        "scale": 2,
+        "currency": "USD"
+      },
+      "1.015",
+      3,
+      "EUR",
+      2
+    ],
+    "expected": {
+      "amount": "1.02",
+      "scale": 2,
+      "currency": "EUR"
+    }
+  }
+]

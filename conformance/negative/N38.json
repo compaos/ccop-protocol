@@ -1,0 +1,6 @@
+{
+  "id": "N38",
+  "description": "unauthorized governance writer rejected",
+  "expected": "EVENT_WRITER_UNAUTHORIZED",
+  "executable_in_reference_harness": true
+}

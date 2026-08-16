@@ -1,0 +1,6 @@
+{
+  "id": "N50",
+  "description": "negative-zero Money rejected",
+  "expected": "DECIMAL_NEGATIVE_ZERO",
+  "executable_in_reference_harness": true
+}

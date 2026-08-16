@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/shared/fx-conversion.schema.json",
+  "title": "FXConversion",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "rate",
+    "scale",
+    "source",
+    "observed_at",
+    "rounding_mode"
+  ],
+  "properties": {
+    "rate": {
+      "$ref": "https://ccop.dev/schemas/v0.5.3/shared/decimal.schema.json"
+    },
+    "scale": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source": {
+      "type": "string"
+    },
+    "observed_at": {
+      "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+    },
+    "rounding_mode": {
+      "const": "HALF_EVEN"
+    }
+  }
+}

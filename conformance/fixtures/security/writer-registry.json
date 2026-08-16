@@ -1,0 +1,29 @@
+{
+  "payload": {
+    "governance_writer_registry": {
+      "writers": [
+        {
+          "principal_ref": {
+            "issuer": "urn:example:company:acme",
+            "type": "service_account",
+            "id": "orchestrator"
+          },
+          "allowed_event_types": [
+            "execution.completed"
+          ]
+        },
+        {
+          "principal_ref": {
+            "issuer": "urn:example:company:acme",
+            "type": "service_account",
+            "id": "lease_service"
+          },
+          "allowed_event_types": [
+            "lease.issued",
+            "lease.consumed"
+          ]
+        }
+      ]
+    }
+  }
+}

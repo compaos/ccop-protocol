@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/effect.schema.json",
+  "title": "Effect",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "effect"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "effect"
+      ],
+      "properties": {
+        "effect": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "task_ref",
+            "run_ref",
+            "principal",
+            "tool_ref",
+            "tool_operation_id",
+            "resource_ref",
+            "semantics",
+            "canonical_input",
+            "integrity"
+          ],
+          "properties": {
+            "task_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "run_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "principal": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+            },
+            "tool_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/tool-ref.schema.json"
+            },
+            "tool_operation_id": {
+              "type": "string"
+            },
+            "resource_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/resource-ref.schema.json"
+            },
+            "semantics": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "access",
+                "mutation",
+                "external",
+                "domains"
+              ],
+              "properties": {
+                "access": {
+                  "enum": [
+                    "READ",
+                    "WRITE",
+                    "EXECUTE"
+                  ]
+                },
+                "mutation": {
+                  "enum": [
+                    "NONE",
+                    "CREATE",
+                    "UPDATE",
+                    "DELETE"
+                  ]
+                },
+                "external": {
+                  "type": "boolean"
+                },
+                "domains": {
+                  "type": "array",
+                  "items": {
+                    "enum": [
+                      "financial",
+                      "security",
+                      "communication",
+                      "deployment",
+                      "identity",
+                      "code",
+                      "data",
+                      "collaboration",
+                      "other"
+                    ]
+                  },
+                  "uniqueItems": true
+                }
+              }
+            },
+            "canonical_input": {},
+            "integrity": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "algorithm",
+                "hash"
+              ],
+              "properties": {
+                "algorithm": {
+                  "const": "SHA-256"
+                },
+                "hash": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/semantic-hash.schema.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

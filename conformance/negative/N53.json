@@ -1,0 +1,6 @@
+{
+  "id": "N53",
+  "description": "cancellation timeout does not trigger retry",
+  "expected": "ON_RUN_CANCELLED",
+  "executable_in_reference_harness": false
+}

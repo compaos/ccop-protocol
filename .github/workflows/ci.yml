@@ -1,0 +1,43 @@
+name: Conformance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python and schemas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python tests/validate_repository.py
+      - run: python tests/spec_linter.py
+      - run: python tests/validate_fixtures.py
+      - run: python tests/validate_vectors.py
+      - run: python tests/run_negative_core.py
+
+  differential:
+    name: Python and TypeScript differential
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: reference/typescript/package-lock.json
+      - run: npm ci --prefix reference/typescript
+      - run: python tests/run_differential.py

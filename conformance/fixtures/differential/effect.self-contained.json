@@ -1,0 +1,62 @@
+{
+  "ccop": {
+    "version": "0.5.3",
+    "critical_extensions": []
+  },
+  "object": {
+    "type": "effect",
+    "id": "effect_1",
+    "issuer": "urn:example:company:acme",
+    "revision": 1,
+    "created_at": "2026-08-16T08:00:00Z"
+  },
+  "payload": {
+    "effect": {
+      "task_ref": {
+        "issuer": "urn:example:company:acme",
+        "id": "task_1",
+        "revision": 1
+      },
+      "run_ref": {
+        "issuer": "urn:example:company:acme",
+        "id": "run_1",
+        "revision": 1
+      },
+      "principal": {
+        "issuer": "urn:example:company:acme",
+        "type": "execution_engine",
+        "id": "engine_1"
+      },
+      "tool_ref": {
+        "issuer": "urn:example:company:acme",
+        "type": "tool",
+        "id": "tool_git",
+        "revision": 4
+      },
+      "tool_operation_id": "create_change_request",
+      "resource_ref": {
+        "issuer": "urn:example:scm",
+        "type": "repository",
+        "id": "compaos/ccop"
+      },
+      "semantics": {
+        "access": "WRITE",
+        "mutation": "CREATE",
+        "external": true,
+        "domains": [
+          "code",
+          "collaboration"
+        ]
+      },
+      "canonical_input": {
+        "repository": "compaos/ccop",
+        "head": "fix/auth",
+        "base": "main"
+      },
+      "integrity": {
+        "algorithm": "SHA-256",
+        "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    }
+  }
+}

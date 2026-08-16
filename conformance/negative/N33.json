@@ -1,0 +1,6 @@
+{
+  "id": "N33",
+  "description": "control-closure independence enforced",
+  "expected": "VERIFICATION_INDEPENDENCE_FAILED",
+  "executable_in_reference_harness": false
+}

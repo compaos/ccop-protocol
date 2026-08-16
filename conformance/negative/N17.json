@@ -1,0 +1,6 @@
+{
+  "id": "N17",
+  "description": "unauthorized reconciliation denied",
+  "expected": "RECONCILIATION_UNAUTHORIZED",
+  "executable_in_reference_harness": false
+}

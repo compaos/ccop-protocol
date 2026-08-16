@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/shared/json-pointer.schema.json",
+  "title": "JSON Pointer",
+  "type": "string",
+  "pattern": "^(?:|/(?:[^~/]|~[01])*)$"
+}

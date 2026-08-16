@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/shared/tool-ref.schema.json",
+  "title": "ToolRef",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "issuer",
+    "id",
+    "revision"
+  ],
+  "properties": {
+    "issuer": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

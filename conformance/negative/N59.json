@@ -1,0 +1,6 @@
+{
+  "id": "N59",
+  "description": "concurrent max_operations=1 permits at most one attempt",
+  "expected": "AT_MOST_ONE_ALLOWED",
+  "executable_in_reference_harness": false
+}

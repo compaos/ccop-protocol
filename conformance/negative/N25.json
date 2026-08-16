@@ -1,0 +1,6 @@
+{
+  "id": "N25",
+  "description": "set-array canonicalization identical",
+  "expected": "CANONICAL_EQUAL",
+  "executable_in_reference_harness": true
+}

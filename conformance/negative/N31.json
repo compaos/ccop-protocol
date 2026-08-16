@@ -1,0 +1,6 @@
+{
+  "id": "N31",
+  "description": "pinned Tool revision preserved during retry",
+  "expected": "TOOL_REVISION_PINNED",
+  "executable_in_reference_harness": false
+}

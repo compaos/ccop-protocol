@@ -1,0 +1,6 @@
+{
+  "id": "N06",
+  "description": "missing required approval blocks operation",
+  "expected": "APPROVAL_REQUIRED",
+  "executable_in_reference_harness": false
+}

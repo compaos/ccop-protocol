@@ -1,0 +1,6 @@
+{
+  "id": "N55",
+  "description": "leap-second and -00:00 timestamps rejected",
+  "expected": "TIMESTAMP_REJECTED",
+  "executable_in_reference_harness": true
+}

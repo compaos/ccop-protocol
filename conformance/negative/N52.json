@@ -1,0 +1,6 @@
+{
+  "id": "N52",
+  "description": "assertion_window with cardinality=one rejected",
+  "expected": "VERIFICATION_WINDOW_INVALID",
+  "executable_in_reference_harness": false
+}

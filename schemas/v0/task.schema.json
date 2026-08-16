@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/task.schema.json",
+  "title": "Task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "task"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task"
+      ],
+      "properties": {
+        "task": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "status",
+            "on_behalf_of",
+            "verification",
+            "execution_completion",
+            "recovery_policy"
+          ],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "status": {
+              "enum": [
+                "DRAFT",
+                "READY",
+                "ACTIVE",
+                "WAITING_AUTHORITY",
+                "VERIFYING",
+                "NEEDS_DECISION",
+                "VERIFIED",
+                "FAILED",
+                "CANCELLED"
+              ]
+            },
+            "on_behalf_of": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+            },
+            "authority": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "scope_ref",
+                "mode"
+              ],
+              "properties": {
+                "scope_ref": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+                },
+                "mode": {
+                  "const": "ceiling-only"
+                }
+              }
+            },
+            "verification": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "required"
+              ],
+              "properties": {
+                "required": {
+                  "const": true
+                },
+                "spec_ref": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+                }
+              }
+            },
+            "execution_completion": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "mode"
+              ],
+              "properties": {
+                "mode": {
+                  "enum": [
+                    "first_success",
+                    "explicit"
+                  ]
+                }
+              }
+            },
+            "recovery_policy": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "on_child_failure",
+                "on_authority_denied",
+                "on_run_failure",
+                "on_run_timeout",
+                "on_run_cancelled",
+                "on_verification_failed",
+                "on_unable_to_verify",
+                "on_budget_exceeded",
+                "on_deadline_exceeded"
+              ],
+              "properties": {
+                "on_child_failure": {
+                  "enum": [
+                    "FAILED",
+                    "NEEDS_DECISION"
+                  ]
+                },
+                "on_authority_denied": {
+                  "enum": [
+                    "NEEDS_DECISION",
+                    "FAILED"
+                  ]
+                },
+                "on_run_failure": {
+                  "enum": [
+                    "ACTIVE",
+                    "FAILED",
+                    "NEEDS_DECISION"
+                  ]
+                },
+                "on_run_timeout": {
+                  "enum": [
+                    "ACTIVE",
+                    "FAILED",
+                    "NEEDS_DECISION"
+                  ]
+                },
+                "on_run_cancelled": {
+                  "enum": [
+                    "CANCELLED",
+                    "NEEDS_DECISION"
+                  ]
+                },
+                "on_verification_failed": {
+                  "enum": [
+                    "ACTIVE",
+                    "FAILED",
+                    "NEEDS_DECISION"
+                  ]
+                },
+                "on_unable_to_verify": {
+                  "enum": [
+                    "FAILED",
+                    "NEEDS_DECISION"
+                  ]
+                },
+                "on_budget_exceeded": {
+                  "enum": [
+                    "FAILED",
+                    "NEEDS_DECISION"
+                  ]
+                },
+                "on_deadline_exceeded": {
+                  "enum": [
+                    "FAILED",
+                    "NEEDS_DECISION"
+                  ]
+                }
+              }
+            },
+            "constraints": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "budget": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/money.schema.json"
+                },
+                "deadline": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+                }
+              }
+            },
+            "acceptance_criteria": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "statement"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "statement": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

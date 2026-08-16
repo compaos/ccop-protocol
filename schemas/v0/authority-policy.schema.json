@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/authority_policy.schema.json",
+  "title": "AuthorityPolicy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "authority_policy"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_policy"
+      ],
+      "properties": {
+        "authority_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "rules"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "normal",
+                "ceiling-only"
+              ]
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "decision"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "decision": {
+                    "enum": [
+                      "ALLOW",
+                      "DENY",
+                      "REQUIRE_APPROVAL"
+                    ]
+                  },
+                  "match": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "path",
+                        "operator"
+                      ],
+                      "properties": {
+                        "path": {
+                          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/json-pointer.schema.json"
+                        },
+                        "operator": {
+                          "enum": [
+                            "eq",
+                            "neq",
+                            "in",
+                            "contains",
+                            "glob",
+                            "gt",
+                            "gte",
+                            "lt",
+                            "lte",
+                            "decimal_eq",
+                            "decimal_neq",
+                            "decimal_gt",
+                            "decimal_gte",
+                            "decimal_lt",
+                            "decimal_lte"
+                          ]
+                        },
+                        "value": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

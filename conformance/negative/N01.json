@@ -1,0 +1,6 @@
+{
+  "id": "N01",
+  "description": "operation without grant is denied",
+  "expected": "AUTHORITY_DENIED",
+  "executable_in_reference_harness": false
+}

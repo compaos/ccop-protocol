@@ -1,0 +1,6 @@
+{
+  "id": "N40",
+  "description": "assertion cardinality ambiguity rejected",
+  "expected": "UNABLE_TO_EVALUATE",
+  "executable_in_reference_harness": false
+}

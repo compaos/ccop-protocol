@@ -1,0 +1,6 @@
+{
+  "id": "N09",
+  "description": "unsafe idempotent retry is prevented",
+  "expected": "RETRY_PROHIBITED",
+  "executable_in_reference_harness": false
+}

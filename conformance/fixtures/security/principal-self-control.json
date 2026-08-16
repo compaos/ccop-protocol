@@ -1,0 +1,17 @@
+{
+  "payload": {
+    "principal": {
+      "type": "execution_engine",
+      "control": {
+        "declaration": "complete",
+        "asserted_by": {
+          "issuer": "urn:example:company:acme",
+          "type": "execution_engine",
+          "id": "engine_1"
+        },
+        "asserted_at": "2026-08-16T08:00:00Z",
+        "controlled_by": []
+      }
+    }
+  }
+}

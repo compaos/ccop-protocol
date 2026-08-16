@@ -1,0 +1,6 @@
+{
+  "id": "N27",
+  "description": "ambiguous reconciliation does not claim OCCURRED",
+  "expected": "UNKNOWN",
+  "executable_in_reference_harness": false
+}

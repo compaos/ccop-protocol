@@ -1,0 +1,6 @@
+{
+  "id": "N29",
+  "description": "Event hash cross-language equality",
+  "expected": "HASH_EQUAL",
+  "executable_in_reference_harness": true
+}

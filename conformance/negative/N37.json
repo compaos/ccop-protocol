@@ -1,0 +1,6 @@
+{
+  "id": "N37",
+  "description": "Event sequence gap rejected",
+  "expected": "EVENT_SEQUENCE_INVALID",
+  "executable_in_reference_harness": false
+}
