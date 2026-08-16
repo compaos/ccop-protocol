@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This project governs the Compaos Protocol as an implementation-neutral public standard. Governance decisions must protect interoperability and the ability of independent implementations to participate on equal terms.
+This project governs the Company Coordination and Operations Protocol (CCOP) as an implementation-neutral public standard. Governance decisions must protect interoperability and the ability of independent implementations to participate on equal terms.
 
 ## Roles
 

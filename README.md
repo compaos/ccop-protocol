@@ -1,8 +1,10 @@
-# Compaos Protocol
+# CCOP — Company Coordination and Operations Protocol
 
-Compaos Protocol is an open, implementation-neutral standard for describing governed organizational work. It defines interoperable objects, lifecycle rules, authority boundaries, verification semantics, canonicalization rules, and conformance tests without requiring a particular product, deployment model, programming language, AI provider, or commercial service.
+**A protocol for governed coordination and execution across humans, AI systems, tools, and enterprise software.**
 
-This repository is the home of the standard. Compaos OS and every other compatible system are implementations of the Protocol; no implementation is the Protocol itself.
+CCOP is an open, implementation-neutral standard for describing governed organizational work. It defines interoperable objects, lifecycle rules, authority boundaries, verification semantics, canonicalization rules, and conformance tests without requiring a particular product, deployment model, programming language, AI provider, or commercial service.
+
+This repository is the home of the standard. Compaos OS and every other compatible system are implementations of CCOP; no implementation is the Protocol itself.
 
 ## Current release
 
@@ -70,7 +72,7 @@ Implementations conform to a named Protocol version and conformance profile, nev
 
 Protocol changes are evaluated on interoperability, safety, implementability, and ecosystem impact. Product roadmaps, hosted services, private configuration, customer data, and commercial documents are out of scope. No implementation receives normative privileges.
 
-The intended canonical repository is `github.com/compaos/compaos-protocol`.
+The canonical repository is `github.com/compaos/ccop-protocol`.
 
 ## Participation
 

@@ -6,7 +6,7 @@ Security fixes are provided for the latest published Protocol version. During th
 
 ## Reporting a vulnerability
 
-Do not open a public issue for an undisclosed vulnerability. Use GitHub private vulnerability reporting for `compaos/compaos-protocol` when available. If that channel is unavailable, email [protocol@compaos.ai](mailto:protocol@compaos.ai) with the subject `SECURITY: Compaos Protocol vulnerability report`.
+Do not open a public issue for an undisclosed vulnerability. Use GitHub private vulnerability reporting for `compaos/ccop-protocol` when available. If that channel is unavailable, email [protocol@compaos.ai](mailto:protocol@compaos.ai) with the subject `SECURITY: CCOP vulnerability report`.
 
 Do not include secrets or unnecessary personal, customer, or production data. If email encryption is required, request a secure exchange channel before sending sensitive reproduction material.
 
