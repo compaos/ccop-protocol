@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/governance_writer_registry.schema.json",
+  "title": "GovernanceWriterRegistry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "governance_writer_registry"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "governance_writer_registry"
+      ],
+      "properties": {
+        "governance_writer_registry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "writers"
+          ],
+          "properties": {
+            "writers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "principal_ref",
+                  "allowed_event_types"
+                ],
+                "properties": {
+                  "principal_ref": {
+                    "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+                  },
+                  "allowed_event_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

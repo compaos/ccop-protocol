@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/capability_lease.schema.json",
+  "title": "CapabilityLease",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "capability_lease"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability_lease"
+      ],
+      "properties": {
+        "capability_lease": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "principal_ref",
+            "effect_ref",
+            "authority_decision_ref",
+            "resource_ref",
+            "tool_ref",
+            "tool_operation_id",
+            "run_ref",
+            "issued_at",
+            "expires_at",
+            "max_operations"
+          ],
+          "properties": {
+            "principal_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+            },
+            "effect_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "authority_decision_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "approval_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "resource_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/resource-ref.schema.json"
+            },
+            "tool_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/tool-ref.schema.json"
+            },
+            "tool_operation_id": {
+              "type": "string"
+            },
+            "run_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "issued_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            },
+            "expires_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            },
+            "max_operations": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "N15",
+  "description": "canonical defaults cross-language equality",
+  "expected": "CANONICAL_EQUAL",
+  "executable_in_reference_harness": false
+}

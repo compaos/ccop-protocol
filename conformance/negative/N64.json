@@ -1,0 +1,6 @@
+{
+  "id": "N64",
+  "description": "leap second rejected",
+  "expected": "TIMESTAMP_LEAP_SECOND",
+  "executable_in_reference_harness": true
+}

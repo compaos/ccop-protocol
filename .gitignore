@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+reference/typescript/node_modules/
+.venv/
+coverage/
+/doc[!A-Za-z]*/
+.omx/

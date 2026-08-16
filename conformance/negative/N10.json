@@ -1,0 +1,6 @@
+{
+  "id": "N10",
+  "description": "policy conflict resolves restrictively",
+  "expected": "DENY",
+  "executable_in_reference_harness": false
+}

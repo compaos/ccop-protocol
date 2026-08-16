@@ -1,0 +1,6 @@
+{
+  "id": "N42",
+  "description": "Approval/Lease counters reconstructable from Events",
+  "expected": "COUNTER_RECONSTRUCTABLE",
+  "executable_in_reference_harness": true
+}

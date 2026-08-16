@@ -1,0 +1,6 @@
+{
+  "id": "N03",
+  "description": "expired/exhausted lease is denied",
+  "expected": "LEASE_EXHAUSTED",
+  "executable_in_reference_harness": false
+}

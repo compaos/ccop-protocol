@@ -1,0 +1,6 @@
+{
+  "id": "N07",
+  "description": "modified Effect invalidates Approval",
+  "expected": "APPROVAL_EFFECT_MISMATCH",
+  "executable_in_reference_harness": false
+}

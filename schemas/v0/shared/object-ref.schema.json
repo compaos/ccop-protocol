@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json",
+  "title": "ObjectRef",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "issuer",
+    "type",
+    "id",
+    "revision"
+  ],
+  "properties": {
+    "issuer": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

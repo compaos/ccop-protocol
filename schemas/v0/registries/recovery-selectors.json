@@ -1,0 +1,41 @@
+{
+  "on_child_failure": [
+    "FAILED",
+    "NEEDS_DECISION"
+  ],
+  "on_authority_denied": [
+    "NEEDS_DECISION",
+    "FAILED"
+  ],
+  "on_run_failure": [
+    "ACTIVE",
+    "FAILED",
+    "NEEDS_DECISION"
+  ],
+  "on_run_timeout": [
+    "ACTIVE",
+    "FAILED",
+    "NEEDS_DECISION"
+  ],
+  "on_run_cancelled": [
+    "CANCELLED",
+    "NEEDS_DECISION"
+  ],
+  "on_verification_failed": [
+    "ACTIVE",
+    "FAILED",
+    "NEEDS_DECISION"
+  ],
+  "on_unable_to_verify": [
+    "FAILED",
+    "NEEDS_DECISION"
+  ],
+  "on_budget_exceeded": [
+    "FAILED",
+    "NEEDS_DECISION"
+  ],
+  "on_deadline_exceeded": [
+    "FAILED",
+    "NEEDS_DECISION"
+  ]
+}

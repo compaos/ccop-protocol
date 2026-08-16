@@ -1,0 +1,6 @@
+{
+  "id": "N60",
+  "description": "mixed budget scale normalized or rejected",
+  "expected": "MONEY_SCOPE_MISMATCH",
+  "executable_in_reference_harness": false
+}

@@ -1,0 +1,18 @@
+{
+  "semantics.domains": "SET",
+  "ccop.critical_extensions": "SET",
+  "tool_operation_ids": "SET",
+  "resource_refs": "SET",
+  "tool_refs": "SET",
+  "related_refs": "SET",
+  "reason_codes": "SET",
+  "policy_basis": "SET",
+  "grant_basis": "SET",
+  "acceptance_criteria": "SET",
+  "checks": "SET",
+  "evidence_refs": "SET",
+  "policy.match": "SET",
+  "policy.rules": "SET",
+  "controlled_by": "SET",
+  "event_stream": "SEQUENCE"
+}

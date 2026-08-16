@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/shared/resource-ref.schema.json",
+  "title": "ResourceRef",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "issuer",
+    "type",
+    "id"
+  ],
+  "properties": {
+    "issuer": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    }
+  }
+}

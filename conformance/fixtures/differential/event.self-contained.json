@@ -1,0 +1,45 @@
+{
+  "payload": {
+    "event": {
+      "stream_id": "governance/company_01",
+      "sequence": 1,
+      "event_type": "operation.started",
+      "actor": {
+        "issuer": "urn:example:company:acme",
+        "type": "service_account",
+        "id": "pep"
+      },
+      "subject_ref": {
+        "issuer": "urn:example:company:acme",
+        "id": "operation_1",
+        "revision": 1
+      },
+      "related_refs": [
+        {
+          "issuer": "urn:example:company:acme",
+          "id": "lease_1",
+          "revision": 1
+        },
+        {
+          "issuer": "urn:example:company:acme",
+          "id": "effect_1",
+          "revision": 1
+        }
+      ],
+      "writer_registry_ref": {
+        "issuer": "urn:example:company:acme",
+        "id": "registry_1",
+        "revision": 1
+      },
+      "occurred_at": "2026-08-16T10:00:00+02:00",
+      "event_payload": {
+        "attempt": 1
+      },
+      "integrity": {
+        "algorithm": "SHA-256",
+        "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    }
+  }
+}

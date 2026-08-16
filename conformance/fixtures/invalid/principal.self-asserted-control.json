@@ -1,0 +1,27 @@
+{
+  "ccop": {
+    "version": "0.5.3"
+  },
+  "object": {
+    "type": "principal",
+    "id": "engine_01",
+    "issuer": "urn:example:company:acme",
+    "revision": 1,
+    "created_at": "2026-08-16T08:00:00Z"
+  },
+  "payload": {
+    "principal": {
+      "type": "execution_engine",
+      "control": {
+        "declaration": "complete",
+        "asserted_by": {
+          "issuer": "urn:example:company:acme",
+          "type": "execution_engine",
+          "id": "engine_01"
+        },
+        "asserted_at": "2026-08-16T08:00:00Z",
+        "controlled_by": []
+      }
+    }
+  }
+}

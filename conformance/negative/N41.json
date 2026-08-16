@@ -1,0 +1,6 @@
+{
+  "id": "N41",
+  "description": "budget FX aggregation deterministic",
+  "expected": "MONEY_EQUAL",
+  "executable_in_reference_harness": true
+}

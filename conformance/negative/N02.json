@@ -1,0 +1,6 @@
+{
+  "id": "N02",
+  "description": "branch constraint escape is denied",
+  "expected": "AUTHORITY_DENIED",
+  "executable_in_reference_harness": false
+}

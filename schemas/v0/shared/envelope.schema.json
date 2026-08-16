@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/shared/envelope.schema.json",
+  "title": "CCOP Envelope",
+  "type": "object",
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object"
+    },
+    "object": {
+      "type": "object"
+    },
+    "payload": {
+      "type": "object"
+    }
+  }
+}

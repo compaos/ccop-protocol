@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/authority_grant.schema.json",
+  "title": "AuthorityGrant",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "authority_grant"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_grant"
+      ],
+      "properties": {
+        "authority_grant": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "subject",
+            "root",
+            "scope"
+          ],
+          "properties": {
+            "subject": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+            },
+            "root": {
+              "type": "boolean"
+            },
+            "scope": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "resource_refs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://ccop.dev/schemas/v0.5.3/shared/resource-ref.schema.json"
+                  }
+                },
+                "tool_refs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://ccop.dev/schemas/v0.5.3/shared/tool-ref.schema.json"
+                  }
+                },
+                "tool_operation_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "delegated_by": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "grant_ref",
+                "principal"
+              ],
+              "properties": {
+                "grant_ref": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+                },
+                "principal": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

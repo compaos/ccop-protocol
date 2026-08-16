@@ -1,0 +1,6 @@
+{
+  "id": "N13",
+  "description": "Execution Engine cannot create root authority",
+  "expected": "GRANT_INVALID_ROOT",
+  "executable_in_reference_harness": false
+}

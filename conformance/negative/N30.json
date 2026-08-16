@@ -1,0 +1,6 @@
+{
+  "id": "N30",
+  "description": "Tool revision update does not alter in-flight Effect idempotency",
+  "expected": "IDEMPOTENCY_STABLE",
+  "executable_in_reference_harness": false
+}

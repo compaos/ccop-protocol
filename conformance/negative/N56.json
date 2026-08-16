@@ -1,0 +1,6 @@
+{
+  "id": "N56",
+  "description": "Execution Engine self-declared complete empty control is untrusted",
+  "expected": "CONTROL_ASSERTION_UNTRUSTED",
+  "executable_in_reference_harness": true
+}

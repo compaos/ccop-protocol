@@ -1,0 +1,6 @@
+{
+  "id": "N58",
+  "description": "historical writer revision substitution detected",
+  "expected": "REGISTRY_REVISION_MISMATCH",
+  "executable_in_reference_harness": false
+}

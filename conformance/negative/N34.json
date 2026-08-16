@@ -1,0 +1,6 @@
+{
+  "id": "N34",
+  "description": "Task ceiling cannot create authority",
+  "expected": "DENY",
+  "executable_in_reference_harness": false
+}

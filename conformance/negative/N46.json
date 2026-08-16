@@ -1,0 +1,6 @@
+{
+  "id": "N46",
+  "description": "control assertion provenance validated",
+  "expected": "CONTROL_ASSERTION_TRUSTED",
+  "executable_in_reference_harness": true
+}

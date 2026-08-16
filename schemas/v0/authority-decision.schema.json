@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/authority_decision.schema.json",
+  "title": "AuthorityDecision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "authority_decision"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_decision"
+      ],
+      "properties": {
+        "authority_decision": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "effect_ref",
+            "effect_hash",
+            "principal_ref",
+            "decision",
+            "evaluated_at"
+          ],
+          "properties": {
+            "effect_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "effect_hash": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/semantic-hash.schema.json"
+            },
+            "principal_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+            },
+            "decision": {
+              "enum": [
+                "ALLOW",
+                "DENY",
+                "REQUIRE_APPROVAL"
+              ]
+            },
+            "policy_basis": {
+              "type": "array",
+              "items": {
+                "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+              }
+            },
+            "grant_basis": {
+              "type": "array",
+              "items": {
+                "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+              }
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evaluated_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

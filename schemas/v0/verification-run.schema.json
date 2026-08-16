@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/verification_run.schema.json",
+  "title": "VerificationRun",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "verification_run"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verification_run"
+      ],
+      "properties": {
+        "verification_run": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "task_ref",
+            "verification_spec_ref",
+            "selected_evidence_refs",
+            "verifier_principal",
+            "started_at"
+          ],
+          "properties": {
+            "task_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "verification_spec_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "selected_evidence_refs": {
+              "type": "array",
+              "items": {
+                "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+              }
+            },
+            "verifier_principal": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+            },
+            "started_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            },
+            "ended_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

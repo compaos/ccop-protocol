@@ -1,0 +1,4 @@
+[project]
+name="ccop-ref"
+version="0.5.3"
+requires-python=">=3.11"

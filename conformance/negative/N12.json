@@ -1,0 +1,6 @@
+{
+  "id": "N12",
+  "description": "AUTHORITY_DENIED does not auto-retry",
+  "expected": "NO_AUTO_RETRY",
+  "executable_in_reference_harness": false
+}

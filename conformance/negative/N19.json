@@ -1,0 +1,6 @@
+{
+  "id": "N19",
+  "description": "evidence admission requires authority",
+  "expected": "EVIDENCE_ADMISSION_UNAUTHORIZED",
+  "executable_in_reference_harness": false
+}

@@ -1,0 +1,6 @@
+{
+  "id": "N36",
+  "description": "Event tampering detectable",
+  "expected": "EVENT_HASH_MISMATCH",
+  "executable_in_reference_harness": false
+}

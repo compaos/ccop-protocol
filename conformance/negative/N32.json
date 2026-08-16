@@ -1,0 +1,6 @@
+{
+  "id": "N32",
+  "description": "four-eyes approval enforced",
+  "expected": "APPROVAL_INDEPENDENCE_VIOLATION",
+  "executable_in_reference_harness": false
+}

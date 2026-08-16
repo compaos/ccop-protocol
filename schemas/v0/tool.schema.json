@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/tool.schema.json",
+  "title": "Tool",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "tool"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool"
+      ],
+      "properties": {
+        "tool": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "operations"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "operations": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "tool_operation_id",
+                  "semantics",
+                  "authority",
+                  "input_schema"
+                ],
+                "properties": {
+                  "tool_operation_id": {
+                    "type": "string"
+                  },
+                  "semantics": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "access",
+                      "mutation",
+                      "external",
+                      "domains"
+                    ],
+                    "properties": {
+                      "access": {
+                        "enum": [
+                          "READ",
+                          "WRITE",
+                          "EXECUTE"
+                        ]
+                      },
+                      "mutation": {
+                        "enum": [
+                          "NONE",
+                          "CREATE",
+                          "UPDATE",
+                          "DELETE"
+                        ]
+                      },
+                      "external": {
+                        "type": "boolean"
+                      },
+                      "domains": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "financial",
+                            "security",
+                            "communication",
+                            "deployment",
+                            "identity",
+                            "code",
+                            "data",
+                            "collaboration",
+                            "other"
+                          ]
+                        },
+                        "uniqueItems": true
+                      }
+                    }
+                  },
+                  "authority": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "required"
+                    ],
+                    "properties": {
+                      "required": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "input_schema": {
+                    "type": "object"
+                  },
+                  "reconciliation": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "operation"
+                    ],
+                    "properties": {
+                      "operation": {
+                        "type": "string"
+                      },
+                      "match_on": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/json-pointer.schema.json"
+                        }
+                      },
+                      "heuristic": {
+                        "type": "boolean"
+                      },
+                      "fingerprint": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "input": {
+    "stream_id": "governance/company_01",
+    "sequence": 1,
+    "event_type": "execution.completed",
+    "actor": {
+      "issuer": "urn:example:company:acme",
+      "type": "service_account",
+      "id": "orchestrator"
+    },
+    "subject_ref": {
+      "issuer": "urn:example:company:acme",
+      "type": "task",
+      "id": "task_01",
+      "revision": 1
+    },
+    "writer_registry_ref": {
+      "issuer": "urn:example:company:acme",
+      "type": "governance_writer_registry",
+      "id": "governance_writers_primary",
+      "revision": 1
+    },
+    "occurred_at": "2026-08-16T10:00:00+02:00",
+    "event_payload": {},
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "canonical_json": "{\"actor\":{\"id\":\"orchestrator\",\"issuer\":\"urn:example:company:acme\",\"type\":\"service_account\"},\"event_payload\":{},\"event_type\":\"execution.completed\",\"occurred_at\":\"2026-08-16T08:00:00Z\",\"prev_hash\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"sequence\":1,\"stream_id\":\"governance/company_01\",\"subject_ref\":{\"id\":\"task_01\",\"issuer\":\"urn:example:company:acme\",\"revision\":1,\"type\":\"task\"},\"writer_registry_ref\":{\"id\":\"governance_writers_primary\",\"issuer\":\"urn:example:company:acme\",\"revision\":1,\"type\":\"governance_writer_registry\"}}",
+  "sha256": "d36d5b836fc5ade12fc6367f84ed2d0685ee37ad35b528bc759a702b61eb21ca",
+  "genesis_prev_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+}

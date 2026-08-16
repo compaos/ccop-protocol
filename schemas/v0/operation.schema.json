@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/operation.schema.json",
+  "title": "Operation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "operation"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation"
+      ],
+      "properties": {
+        "operation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "effect_ref",
+            "tool_operation_id",
+            "state",
+            "lease_ref",
+            "started_at"
+          ],
+          "properties": {
+            "effect_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "tool_operation_id": {
+              "type": "string"
+            },
+            "state": {
+              "enum": [
+                "REQUESTED",
+                "PENDING_AUTHORITY",
+                "AUTHORIZED",
+                "EXECUTING",
+                "SUCCEEDED",
+                "FAILED",
+                "DENIED",
+                "CANCELLED",
+                "TIMED_OUT",
+                "INDETERMINATE"
+              ]
+            },
+            "lease_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "idempotency_key": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/semantic-hash.schema.json"
+            },
+            "started_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            },
+            "ended_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

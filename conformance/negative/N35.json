@@ -1,0 +1,6 @@
+{
+  "id": "N35",
+  "description": "Event deletion detectable",
+  "expected": "EVENT_CHAIN_INVALID",
+  "executable_in_reference_harness": false
+}

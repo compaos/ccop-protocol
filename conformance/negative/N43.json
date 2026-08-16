@@ -1,0 +1,6 @@
+{
+  "id": "N43",
+  "description": "Execution Engine cannot author execution.completed",
+  "expected": "EVENT_WRITER_UNAUTHORIZED",
+  "executable_in_reference_harness": true
+}

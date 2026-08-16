@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/event.schema.json",
+  "title": "Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "event"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event"
+      ],
+      "properties": {
+        "event": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "stream_id",
+            "sequence",
+            "event_type",
+            "actor",
+            "writer_registry_ref",
+            "occurred_at",
+            "integrity"
+          ],
+          "properties": {
+            "stream_id": {
+              "type": "string"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "event_type": {
+              "type": "string"
+            },
+            "actor": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+            },
+            "subject_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "related_refs": {
+              "type": "array",
+              "items": {
+                "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+              }
+            },
+            "writer_registry_ref": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/object-ref.schema.json"
+            },
+            "occurred_at": {
+              "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+            },
+            "event_payload": {},
+            "integrity": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "algorithm",
+                "prev_hash",
+                "hash"
+              ],
+              "properties": {
+                "algorithm": {
+                  "const": "SHA-256"
+                },
+                "prev_hash": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/semantic-hash.schema.json"
+                },
+                "hash": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/semantic-hash.schema.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

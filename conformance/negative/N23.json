@@ -1,0 +1,6 @@
+{
+  "id": "N23",
+  "description": "illegal Task transition rejected",
+  "expected": "TASK_INVALID_TRANSITION",
+  "executable_in_reference_harness": false
+}

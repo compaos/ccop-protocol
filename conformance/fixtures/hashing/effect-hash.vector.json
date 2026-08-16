@@ -1,0 +1,36 @@
+{
+  "input": {
+    "principal": {
+      "issuer": "urn:example:company:acme",
+      "type": "execution_engine",
+      "id": "engine_01"
+    },
+    "tool_ref": {
+      "issuer": "urn:example:company:acme",
+      "id": "tool_scm",
+      "revision": 4
+    },
+    "tool_operation_id": "create_change_request",
+    "resource_ref": {
+      "issuer": "urn:example:scm",
+      "type": "repository",
+      "id": "example/protocol-demo"
+    },
+    "semantics": {
+      "access": "WRITE",
+      "mutation": "CREATE",
+      "external": true,
+      "domains": [
+        "code",
+        "collaboration"
+      ]
+    },
+    "canonical_input": {
+      "repository": "example/protocol-demo",
+      "head": "fix/auth",
+      "base": "main"
+    }
+  },
+  "canonical_json": "{\"canonical_input\":{\"base\":\"main\",\"head\":\"fix/auth\",\"repository\":\"example/protocol-demo\"},\"principal\":{\"id\":\"engine_01\",\"issuer\":\"urn:example:company:acme\",\"type\":\"execution_engine\"},\"resource_ref\":{\"id\":\"example/protocol-demo\",\"issuer\":\"urn:example:scm\",\"type\":\"repository\"},\"semantics\":{\"access\":\"WRITE\",\"domains\":[\"code\",\"collaboration\"],\"external\":true,\"mutation\":\"CREATE\"},\"tool_operation_id\":\"create_change_request\",\"tool_ref\":{\"id\":\"tool_scm\",\"issuer\":\"urn:example:company:acme\",\"revision\":4}}",
+  "sha256": "8a63f9a63e0458b8efd1b08bdf50707959f449a2e7c652625099bac7fd78da42"
+}

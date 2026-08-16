@@ -1,0 +1,6 @@
+{
+  "id": "N11",
+  "description": "INDETERMINATE operation cannot retry without reconciliation",
+  "expected": "RETRY_PROHIBITED",
+  "executable_in_reference_harness": false
+}

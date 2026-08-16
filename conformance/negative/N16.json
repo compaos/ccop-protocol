@@ -1,0 +1,6 @@
+{
+  "id": "N16",
+  "description": "Approval max_leases enforced",
+  "expected": "APPROVAL_LEASE_LIMIT",
+  "executable_in_reference_harness": false
+}

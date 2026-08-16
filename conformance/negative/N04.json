@@ -1,0 +1,6 @@
+{
+  "id": "N04",
+  "description": "delegation scope expansion is denied",
+  "expected": "GRANT_SCOPE_ESCALATION",
+  "executable_in_reference_harness": false
+}

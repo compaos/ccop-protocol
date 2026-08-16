@@ -1,0 +1,6 @@
+{
+  "id": "N54",
+  "description": "decimal comparison deterministic",
+  "expected": "DECIMAL_EQUAL",
+  "executable_in_reference_harness": true
+}

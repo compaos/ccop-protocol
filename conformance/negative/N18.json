@@ -1,0 +1,6 @@
+{
+  "id": "N18",
+  "description": "lease attempt counting is per attempt",
+  "expected": "ATTEMPT_CONSUMED",
+  "executable_in_reference_harness": false
+}

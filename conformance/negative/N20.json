@@ -1,0 +1,6 @@
+{
+  "id": "N20",
+  "description": "rejected evidence admission leaves audit record",
+  "expected": "EVIDENCE_REJECTED_EVENT",
+  "executable_in_reference_harness": false
+}

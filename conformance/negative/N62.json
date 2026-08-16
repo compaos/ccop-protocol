@@ -1,0 +1,6 @@
+{
+  "id": "N62",
+  "description": "run_ended_at without unique run_ref rejected",
+  "expected": "VERIFICATION_WINDOW_INVALID",
+  "executable_in_reference_harness": false
+}

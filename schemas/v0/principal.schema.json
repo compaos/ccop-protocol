@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/principal.schema.json",
+  "title": "Principal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ccop",
+    "object",
+    "payload"
+  ],
+  "properties": {
+    "ccop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "const": "0.5.3"
+        },
+        "critical_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id",
+        "issuer",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "type": {
+          "const": "principal"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        },
+        "updated_at": {
+          "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principal"
+      ],
+      "properties": {
+        "principal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "human",
+                "organization",
+                "organization_role",
+                "team",
+                "service_account",
+                "execution_engine",
+                "external_system"
+              ]
+            },
+            "control": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "declaration",
+                "asserted_by",
+                "asserted_at",
+                "controlled_by"
+              ],
+              "properties": {
+                "declaration": {
+                  "enum": [
+                    "complete",
+                    "partial",
+                    "unknown"
+                  ]
+                },
+                "asserted_by": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+                },
+                "asserted_at": {
+                  "$ref": "https://ccop.dev/schemas/v0.5.3/shared/timestamp.schema.json"
+                },
+                "controlled_by": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json"
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

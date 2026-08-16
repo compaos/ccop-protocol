@@ -1,0 +1,6 @@
+{
+  "id": "N21",
+  "description": "budget exhaustion blocks new chargeable execution",
+  "expected": "TASK_BUDGET_EXCEEDED",
+  "executable_in_reference_harness": false
+}

@@ -1,0 +1,173 @@
+// @ts-nocheck
+import { createHash } from "node:crypto";
+export const GENESIS_HASH = "0".repeat(64);
+export const SAFE_INT_MAX = 9007199254740991;
+export class CCOPError extends Error {
+}
+export function canonicalTimestamp(s) {
+    if (/T23:59:60(?:[.Z+-])/.test(s))
+        throw new CCOPError("TIMESTAMP_LEAP_SECOND");
+    if (s.endsWith("-00:00"))
+        throw new CCOPError("TIMESTAMP_UNKNOWN_OFFSET");
+    const m = s.match(/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d+))?(Z|[+-]\d\d:\d\d)$/);
+    if (!m)
+        throw new CCOPError("TIMESTAMP_INVALID");
+    const frac = m[2] ?? "";
+    if (frac.length > 9)
+        throw new CCOPError("TIMESTAMP_PRECISION");
+    // JS Date safely handles the second+offset; fractional is preserved separately.
+    const d = new Date(m[1] + m[3]);
+    if (Number.isNaN(d.getTime()))
+        throw new CCOPError("TIMESTAMP_INVALID");
+    const base = d.toISOString().slice(0, 19);
+    const f = frac.replace(/0+$/, "");
+    return base + (f ? "." + f : "") + "Z";
+}
+function validateNumber(v) { if (typeof v !== "number")
+    return; if (!Number.isFinite(v))
+    throw new CCOPError("NUMBER_NONFINITE"); if (Object.is(v, -0))
+    throw new CCOPError("NUMBER_NEGATIVE_ZERO"); if (Number.isInteger(v) && Math.abs(v) > SAFE_INT_MAX)
+    throw new CCOPError("NUMBER_UNSAFE_INTEGER"); }
+export function canonicalJson(v) { if (v === null)
+    return "null"; if (typeof v === "boolean")
+    return v ? "true" : "false"; if (typeof v === "string")
+    return JSON.stringify(v); if (typeof v === "number") {
+    validateNumber(v);
+    return JSON.stringify(v);
+} if (Array.isArray(v))
+    return "[" + v.map(canonicalJson).join(",") + "]"; if (typeof v === "object")
+    return "{" + Object.keys(v).sort().map(k => canonicalJson(k) + ":" + canonicalJson(v[k])).join(",") + "}"; throw new CCOPError("UNSUPPORTED_JSON_TYPE"); }
+const SET_KEYS = new Set(["domains", "critical_extensions", "tool_operation_ids", "tool_refs", "resource_refs", "related_refs", "reason_codes", "policy_basis", "grant_basis", "evidence_refs", "controlled_by"]);
+const TS_KEYS = new Set(["occurred_at", "observed_at", "asserted_at", "issued_at", "expires_at", "started_at", "ended_at", "created_at", "updated_at"]);
+export function deepNormalize(v) { if (Array.isArray(v))
+    return v.map(deepNormalize); if (v && typeof v === "object") {
+    const out = {};
+    for (const [k, val] of Object.entries(v)) {
+        let nv = deepNormalize(val);
+        if ((Array.isArray(nv) && nv.length === 0 || nv && typeof nv === "object" && !Array.isArray(nv) && Object.keys(nv).length === 0) && k !== "critical_extensions" && k !== "event_payload")
+            continue;
+        if (TS_KEYS.has(k) && typeof nv === "string") {
+            try {
+                nv = canonicalTimestamp(nv);
+            }
+            catch { }
+        }
+        if (Array.isArray(nv) && SET_KEYS.has(k))
+            nv = [...nv].sort((a, b) => canonicalJson(a).localeCompare(canonicalJson(b)));
+        out[k] = nv;
+    }
+    return out;
+} validateNumber(v); return v; }
+function sha(s) { return createHash("sha256").update(s, "utf8").digest("hex"); }
+export function effectHash(obj) { const e = obj.payload?.effect ?? obj; const x = {}; for (const k of ["principal", "tool_ref", "tool_operation_id", "resource_ref", "semantics", "canonical_input"])
+    x[k] = e[k]; const ce = obj.ccop?.critical_extensions ?? e.critical_extensions; if (ce && ((Array.isArray(ce) && ce.length) || (typeof ce === "object" && !Array.isArray(ce) && Object.keys(ce).length)))
+    x.critical_extensions = ce; return sha(canonicalJson(deepNormalize(x))); }
+export function eventHash(obj) { const ev = obj.payload?.event ?? obj; const x = {}; for (const k of ["stream_id", "sequence", "event_type", "actor", "subject_ref", "related_refs", "writer_registry_ref", "occurred_at", "event_payload", "prev_hash"])
+    if (ev[k] !== undefined)
+        x[k] = ev[k]; if (x.prev_hash === undefined && ev.integrity?.prev_hash !== undefined)
+    x.prev_hash = ev.integrity.prev_hash; return sha(canonicalJson(deepNormalize(x))); }
+function decParts(s, scale) { if (!/^-?(0|[1-9][0-9]*)(?:\.([0-9]+))?$/.test(s))
+    throw new CCOPError("DECIMAL_INVALID"); if (s.startsWith("-") && /^\-0(?:\.0+)?$/.test(s))
+    throw new CCOPError("DECIMAL_NEGATIVE_ZERO"); const neg = s.startsWith("-"); const t = neg ? s.slice(1) : s; const [a, b = ""] = t.split("."); if (scale !== undefined && b.length !== scale)
+    throw new CCOPError("DECIMAL_SCALE_MISMATCH"); return [BigInt((neg ? "-" : "") + a + b), b.length]; }
+function fmt(n, scale) { const neg = n < 0n; let s = (neg ? -n : n).toString().padStart(scale + 1, "0"); if (scale)
+    s = s.slice(0, -scale) + "." + s.slice(-scale); return (neg ? "-" : "") + s; }
+export function moneyAdd(items, currency, scale) { let n = 0n; for (const m of items) {
+    if (m.currency !== currency || m.scale !== scale)
+        throw new CCOPError("MONEY_SCOPE_MISMATCH");
+    n += decParts(m.amount, scale)[0];
+} return { amount: fmt(n, scale), scale, currency }; }
+function roundHalfEven(num, den) { let q = num / den, r = num % den; const ar = r < 0n ? -r : r, ad = den < 0n ? -den : den; const twice = ar * 2n; if (twice > ad)
+    q += num * den >= 0n ? 1n : -1n;
+else if (twice === ad && (q < 0n ? -q : q) % 2n === 1n)
+    q += num * den >= 0n ? 1n : -1n; return q; }
+export function fxSettle(original, rate, rateScale, targetCurrency, targetScale) { const [a, as] = decParts(original.amount, original.scale); const [r, rs] = decParts(rate, rateScale); const product = a * r; const pscale = as + rs; let n; if (pscale > targetScale)
+    n = roundHalfEven(product, 10n ** BigInt(pscale - targetScale));
+else
+    n = product * (10n ** BigInt(targetScale - pscale)); return { amount: fmt(n, targetScale), scale: targetScale, currency: targetCurrency }; }
+export function pointerGet(obj, path) { if (path === "")
+    return obj; if (!path.startsWith("/"))
+    throw new CCOPError("POINTER_INVALID"); let cur = obj; for (const raw of path.slice(1).split("/")) {
+    const t = raw.replace(/~1/g, "/").replace(/~0/g, "~");
+    if (Array.isArray(cur) && /^\d+$/.test(t) && Number(t) < cur.length)
+        cur = cur[Number(t)];
+    else if (cur && typeof cur === "object" && Object.prototype.hasOwnProperty.call(cur, t))
+        cur = cur[t];
+    else
+        throw new CCOPError("POINTER_UNRESOLVED");
+} return cur; }
+export function ccopGlob(pattern, value) { let rx = "^"; for (let i = 0; i < pattern.length; i++) {
+    const c = pattern[i];
+    if (c === "*") {
+        if (pattern[i + 1] === "*") {
+            rx += ".*";
+            i++;
+        }
+        else
+            rx += "[^/]*";
+    }
+    else if (c === "?")
+        rx += "[^/]";
+    else
+        rx += c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+} return new RegExp(rx + "$").test(value); }
+export function evalOp(left, op, right) { if (op === "exists")
+    return Boolean(left); if (op === "eq")
+    return typeof left === typeof right && canonicalJson(left) === canonicalJson(right); if (op === "neq")
+    return !(typeof left === typeof right && canonicalJson(left) === canonicalJson(right)); if (op === "in") {
+    if (!Array.isArray(right))
+        throw new CCOPError("OP_TYPE");
+    return right.some((x) => typeof x === typeof left && canonicalJson(x) === canonicalJson(left));
+} if (op === "contains") {
+    if (typeof left === "string" && typeof right === "string")
+        return left.includes(right);
+    if (Array.isArray(left))
+        return left.some((x) => typeof x === typeof right && canonicalJson(x) === canonicalJson(right));
+    throw new CCOPError("OP_TYPE");
+} if (op === "glob") {
+    if (typeof left !== "string" || typeof right !== "string")
+        throw new CCOPError("OP_TYPE");
+    return ccopGlob(right, left);
+} if (["gt", "gte", "lt", "lte"].includes(op)) {
+    if (typeof left !== "number" || typeof right !== "number")
+        throw new CCOPError("OP_TYPE");
+    validateNumber(left);
+    validateNumber(right);
+    return op === "gt" ? left > right : op === "gte" ? left >= right : op === "lt" ? left < right : left <= right;
+} if (op.startsWith("decimal_")) {
+    const [a, as] = decParts(left), [b, bs] = decParts(right);
+    const sc = Math.max(as, bs), aa = a * 10n ** BigInt(sc - as), bb = b * 10n ** BigInt(sc - bs), c = op.slice(8);
+    return c === "eq" ? aa === bb : c === "neq" ? aa !== bb : c === "gt" ? aa > bb : c === "gte" ? aa >= bb : c === "lt" ? aa < bb : aa <= bb;
+} throw new CCOPError("OP_UNSUPPORTED"); }
+export function policyDecision(effect, rules) { const ds = []; for (const r of rules) {
+    let ok = true;
+    for (const c of r.match ?? []) {
+        let left;
+        try {
+            left = pointerGet(effect, c.path);
+        }
+        catch {
+            if (c.operator === "exists")
+                left = false;
+            else
+                return "DENY";
+        }
+        try {
+            if (!evalOp(left, c.operator, c.value)) {
+                ok = false;
+                break;
+            }
+        }
+        catch {
+            return "DENY";
+        }
+    }
+    if (ok)
+        ds.push(r.decision);
+} return ds.includes("DENY") ? "DENY" : ds.includes("REQUIRE_APPROVAL") ? "REQUIRE_APPROVAL" : ds.includes("ALLOW") ? "ALLOW" : "DENY"; }
+export function writerAllowed(reg, actor, eventType) { const writers = reg.payload?.governance_writer_registry?.writers ?? reg.writers ?? []; return writers.some((w) => canonicalJson(w.principal_ref) === canonicalJson(actor) && w.allowed_event_types?.includes(eventType)); }
+export function leaseConsumed(events, ref) { return events.filter(e => { const x = e.payload?.event ?? e; return x.event_type === "lease.consumed" && canonicalJson(x.subject_ref) === canonicalJson(ref); }).length; }
+export function approvalLeases(events, ref) { return events.filter(e => { const x = e.payload?.event ?? e; return x.event_type === "lease.issued" && (x.related_refs ?? []).some((r) => canonicalJson(r) === canonicalJson(ref)); }).length; }
+export function counterPrecheck(current, maximum) { return current < maximum; }
+export function controlAssertionTrusted(ref, obj) { const p = obj.payload?.principal ?? obj, c = p.control; if (!c?.asserted_by)
+    return false; return canonicalJson(c.asserted_by) !== canonicalJson(ref); }

@@ -1,0 +1,6 @@
+{
+  "id": "N05",
+  "description": "executor self-evidence cannot directly verify Task",
+  "expected": "UNABLE_TO_VERIFY",
+  "executable_in_reference_harness": false
+}

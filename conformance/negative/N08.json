@@ -1,0 +1,6 @@
+{
+  "id": "N08",
+  "description": "malformed policy fails closed",
+  "expected": "DENY",
+  "executable_in_reference_harness": true
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ccop.dev/schemas/v0.5.3/shared/principal-ref.schema.json",
+  "title": "PrincipalRef",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "issuer",
+    "type",
+    "id"
+  ],
+  "properties": {
+    "issuer": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "human",
+        "organization",
+        "organization_role",
+        "team",
+        "service_account",
+        "execution_engine",
+        "external_system"
+      ]
+    },
+    "id": {
+      "type": "string"
+    }
+  }
+}
